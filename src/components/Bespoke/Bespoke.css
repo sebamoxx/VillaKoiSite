@@ -57,7 +57,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: url('/assets/inquiry-bg.png') center / cover no-repeat;
+  background: url('/assets/inquiry-bg.avif') center / cover no-repeat;
   opacity: 0.22;
   pointer-events: none;
 }

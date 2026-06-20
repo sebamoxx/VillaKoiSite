@@ -26,14 +26,14 @@ const asset = (path) => `${import.meta.env.BASE_URL}${path}`
 
 // The five cut-out koi (Collection.jsx) and the two Atelier morph layers.
 const COLLECTION_IMAGES = [
-  'assets/Kohaku.png',
-  'assets/taisho sanke.png',
-  'assets/Showa.png',
-  'assets/tancho.png',
-  'assets/Yamabuki Ogon.png',
+  'assets/Kohaku.avif',
+  'assets/taisho sanke.avif',
+  'assets/Showa.avif',
+  'assets/tancho.avif',
+  'assets/Yamabuki Ogon.avif',
 ]
 
-const ATELIER_IMAGES = ['assets/blueprint.png', 'assets/final-pond.png']
+const ATELIER_IMAGES = ['assets/blueprint.avif', 'assets/final-pond.avif']
 
 /**
  * The full list of heavy assets to warm before lifting the curtain, in priority

@@ -19,8 +19,8 @@ const asset = (path) => `${import.meta.env.BASE_URL}${path}`
 // `tsukubai` (the stone water basin) is the large, hero-style asymmetric image;
 // `zen-garden` (raked gravel) is the smaller plate that overlaps it. The wrappers
 // clip with overflow:hidden so the slow parallax never spills past their edges.
-const MEDIA_MAIN = 'assets/tsukubai.png'
-const MEDIA_SUB = 'assets/zen-garden.png'
+const MEDIA_MAIN = 'assets/tsukubai.avif'
+const MEDIA_SUB = 'assets/zen-garden.avif'
 
 /**
  * Philosophy — "Il Tempo dell'Acqua".

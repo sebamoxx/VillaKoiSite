@@ -13,7 +13,7 @@ const asset = (path) => `${import.meta.env.BASE_URL}${path}`
 
 // The koi that bleeds off the card's bottom-left, seen through the frosted glass.
 // (Files in /public/assets are .png in this project — not .webp.)
-const INQUIRY_KOI = 'assets/inquiry-koi.png'
+const INQUIRY_KOI = 'assets/inquiry-koi.avif'
 
 // Intent chips. `value` is the machine token sent to the API; `label` is shown.
 const INTENTS = [

@@ -20,8 +20,8 @@ const asset = (path) => `${import.meta.env.BASE_URL}${path}`
 // shot from the SAME viewpoint so the reveal reads as the project "becoming
 // real". Both live in /public/assets as .webp; until they exist the layers
 // degrade to the calm paper ground (see .atelier__layer background).
-const MEDIA_BLUEPRINT = 'assets/blueprint.png'
-const MEDIA_REALITY = 'assets/final-pond.png'
+const MEDIA_BLUEPRINT = 'assets/blueprint.avif'
+const MEDIA_REALITY = 'assets/final-pond.avif'
 
 /**
  * Atelier — "Precisione e Vita".

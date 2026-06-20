@@ -14,7 +14,7 @@ const asset = (path) => `${import.meta.env.BASE_URL}${path}`
 // REQUIRED cut-out asset (transparent background, high-res, .webp/.png). Drop the
 // file at /public/assets/bonsai.webp. Until it exists the portal still composes
 // on its own (dark slit + red sun + haze); only the foreground tree is missing.
-const BONSAI_IMAGE = 'assets/Bonsai.png'
+const BONSAI_IMAGE = 'assets/Bonsai.avif'
 
 /**
  * Bonsai — "Mille Anni in un Vaso" · the Out-of-Bounds Parallax.

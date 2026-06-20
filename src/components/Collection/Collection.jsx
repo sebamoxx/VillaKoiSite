@@ -45,7 +45,7 @@ const MOCK_DATA = [
     name: 'Kohaku Yamamatsu',
     breeder: 'Yamamatsu Farm · Niigata',
     kanji: '紅白',
-    image: 'assets/Kohaku.png',
+    image: 'assets/Kohaku.avif',
   },
   {
     id: 'sanke-omosako',
@@ -53,7 +53,7 @@ const MOCK_DATA = [
     name: 'Sanke Omosako',
     breeder: 'Omosako Farm · Hiroshima',
     kanji: '三色',
-    image: 'assets/taisho sanke.png',
+    image: 'assets/taisho sanke.avif',
   },
   {
     id: 'showa-dainichi',
@@ -61,7 +61,7 @@ const MOCK_DATA = [
     name: 'Showa Dainichi',
     breeder: 'Dainichi Farm · Niigata',
     kanji: '昭和',
-    image: 'assets/Showa.png',
+    image: 'assets/Showa.avif',
   },
   {
     id: 'tancho-sakai',
@@ -69,7 +69,7 @@ const MOCK_DATA = [
     name: 'Tancho Sakai',
     breeder: 'Sakai Fish Farm · Hiroshima',
     kanji: '丹頂',
-    image: 'assets/tancho.png',
+    image: 'assets/tancho.avif',
   },
   {
     id: 'asagi-ogata',
@@ -77,7 +77,7 @@ const MOCK_DATA = [
     name: 'Yamabuki Ogon',
     breeder: 'Ogata Koi Farm · Kumamoto',
     kanji: '浅黄',
-    image: 'assets/Yamabuki Ogon.png',
+    image: 'assets/Yamabuki Ogon.avif',
   },
 ]
 
