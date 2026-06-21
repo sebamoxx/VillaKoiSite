@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import { prefersReducedMotion } from '../../utils/animations' // FIX: needed to fully disable the cursor (and its GSAP quickTo tickers) under reduced-motion
 import './CustomCursor.css'
 
 gsap.registerPlugin(useGSAP)
@@ -145,16 +146,27 @@ function CursorCore() {
 /**
  * CustomCursor — public entry point.
  *
- * Touch / coarse-pointer devices render NOTHING (a faux cursor there is pure UX
- * debt: no pointer to track, ghost taps, stuck states). The check sits above any
+ * Renders NOTHING (and so creates ZERO GSAP tickers) unless the visitor has a real
+ * hovering mouse AND has not asked for reduced motion. Touch / coarse-pointer
+ * devices get no faux cursor (pure UX debt there: no pointer, ghost taps, stuck
+ * states) and skip the GPU-heavy per-frame blend; reduced-motion users keep their
+ * native cursor and pay for no animation loop at all. The check sits above any
  * hook, and the outer component holds no hooks of its own, so this early return is
  * fully rules-of-hooks safe.
  */
 export default function CustomCursor() {
-  const isFinePointer =
-    typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches
+  // FIX: was `(pointer: fine)` only. Now require `(hover: hover) and (pointer: fine)`
+  // AND bail on reduced-motion. Two reasons: (1) GPU — `pointer: fine` is also true
+  // for styluses / hybrid touch laptops, which then paid for the cursor's per-frame
+  // mix-blend-mode compositing; demanding a true hovering mouse keeps that cost off
+  // touch. (2) Ticker — returning null means CursorCore never mounts, so its useGSAP
+  // (and the quickTo tickers inside) are never created under reduced-motion.
+  const enabled =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(hover: hover) and (pointer: fine)').matches &&
+    !prefersReducedMotion()
 
-  if (!isFinePointer) return null
+  if (!enabled) return null
 
   return <CursorCore />
 }

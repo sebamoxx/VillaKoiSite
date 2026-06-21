@@ -9,10 +9,14 @@
    will fight the quickTo tweens.
    ========================================================================== */
 
-/* Hide the OS cursor only where our custom one renders (fine pointers). Touch and
-   coarse-pointer devices keep their native cursor untouched. !important overrides
-   any per-element `cursor` rule elsewhere in the app. */
-@media (pointer: fine) {
+/* FIX: condition now mirrors the JS mount gate EXACTLY — (hover: hover) and
+   (pointer: fine) and (prefers-reduced-motion: no-preference). The custom cursor
+   only mounts for a real hovering mouse with motion allowed, so the native cursor
+   must be hidden ONLY there. The old `@media (pointer: fine)` hid the OS cursor
+   even when the component bailed (stylus / hybrid touch, or reduced-motion),
+   leaving those users with NO visible cursor at all. !important overrides any
+   per-element `cursor` rule elsewhere in the app. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   html,
   html * {
     cursor: none !important;
@@ -63,14 +67,8 @@
   backdrop-filter: blur(2px);
 }
 
-/* Respect reduced-motion: drop the blend inversion's heavier compositing and the
-   frost, keeping a calm, legible pointer. Movement still tracks the mouse. */
-@media (prefers-reduced-motion: reduce) {
-  .cursor__ring {
-    transition: none;
-  }
-  .cursor__ring--hover {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-}
+/* FIX: removed the old `@media (prefers-reduced-motion: reduce)` ring overrides.
+   Under reduced-motion CustomCursor now returns null, so .cursor__ring / its hover
+   state never exist — those rules were dead. Reduced-motion users keep the native
+   cursor (the gated `cursor: none` query above no longer matches for them) and the
+   component spins up no GSAP ticker whatsoever. */
