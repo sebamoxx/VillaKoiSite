@@ -1,0 +1,330 @@
+/* ============================================================================
+   Lacqua — "Il Respiro dell'Acqua"  (/l-acqua)
+   A dark, melancholic, hyper-luxurious scroll piece. ONE photograph of a koi
+   pond is PINNED via CSS `position: sticky` and breathes on scroll (a slow GSAP
+   scale, driven from Lacqua.jsx); editorial text acts are pulled up over it,
+   anchored bottom-left, and dissolve as the next one rises.
+
+   No cards, no glass, no borders: the words live directly on the photograph.
+   Legibility is bought with a dark gradient + vignette painted onto the STAGE
+   (the image), never onto the text. This file owns layout, that vignette, and
+   the typography split — the giant serif against the microscopic sans.
+   ========================================================================== */
+
+.lacqua {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--color-bg-deep);
+  color: var(--color-ink);
+  /* The page opens at the seam of the cinematic route transition; keep the very
+     first paint dark so the void dissolves into the pond, never into a flash. */
+}
+
+/* --- PINNED STAGE ----------------------------------------------------------
+   Sticky, exactly one dynamic viewport tall, holding the photograph. The deep
+   ink ground is the graceful fallback: until the image decodes the visitor sees
+   a sumi void, not white. */
+.lacqua__stage {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100svh;
+  height: 100dvh;
+  overflow: hidden;
+  background:
+    radial-gradient(140% 110% at 60% 22%, #0c0d0f 0%, var(--color-bg-deep) 58%, #020304 100%);
+}
+
+/* The photograph. object-fit:cover keeps it un-distorted at any viewport; the
+   GSAP scale writes `transform`, so it's pre-promoted with will-change. A soft
+   opacity fade-in on mount stops a hard pop when it decodes. */
+.lacqua__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 60% 50%;
+  transform-origin: center center;
+  will-change: transform;
+  /* A touch of grade for the melancholic key: drop the warmth a hair, deepen it. */
+  filter: saturate(0.86) brightness(0.82) contrast(1.04);
+  animation: lacqua-image-in 1.6s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+@keyframes lacqua-image-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* LEGIBILITY VIGNETTE — painted on the stage, under the text, costing nothing
+   per scroll. Three stacked washes:
+     1. a heavy bottom-up ramp so bottom-left white text always holds contrast,
+     2. a soft left wash continuing that anchor,
+     3. a cool, melancholic edge vignette that pools darkness into the corners. */
+.lacqua__vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      to top,
+      rgba(3, 4, 5, 0.92) 0%,
+      rgba(3, 4, 5, 0.5) 26%,
+      rgba(3, 4, 5, 0) 58%
+    ),
+    linear-gradient(
+      to right,
+      rgba(3, 4, 5, 0.58) 0%,
+      rgba(3, 4, 5, 0) 46%
+    ),
+    radial-gradient(125% 125% at 62% 32%, transparent 46%, rgba(2, 3, 5, 0.66) 100%);
+}
+
+/* --- Fixed film-grain ------------------------------------------------------
+   pointer-events:none + fixed → physical texture with no repaint cost on scroll.
+   Pure noise only (the vignette lives on the stage); kept whisper-subtle so it
+   never veils the text it sits over. */
+.lacqua__grain {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* --- Bottone di ritorno integrato nel flusso ------------------------------- */
+.lacqua__back-inline {
+  margin-bottom: clamp(1.5rem, 4vh, 3rem); /* Spinge il testo in basso dolcemente */
+}
+
+/* --- SCROLLING ACTS --------------------------------------------------------
+   Pulled up a full viewport so the first act sits directly over the sticky
+   stage; from there the column scrolls normally while the photo stays pinned. */
+.lacqua__flow {
+  position: relative;
+  z-index: 2;
+  margin-top: -100svh;
+  margin-top: -100dvh;
+}
+
+/* Every act is one full screen with its content anchored MONOLITHICALLY to the
+   bottom-left — the same strict anchor for all of them — leaving the upper photo
+   to breathe. Generous padding does the "let it breathe" work. */
+.lacqua__panel {
+  position: relative;
+  min-height: 100svh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding:
+    clamp(3rem, 10vh, 8rem)
+    clamp(1.5rem, 7vw, 7.5rem)
+    clamp(3.5rem, 9vh, 7rem);
+}
+
+/* The text column. NO background, NO border, NO blur — it sits naked on the
+   photograph, made legible purely by the stage vignette beneath it. */
+.lacqua__content {
+  position: relative;
+  width: 100%;
+  max-width: 64rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(1.4rem, 3.2vh, 2.6rem);
+}
+
+/* --- Typography ------------------------------------------------------------ */
+
+/* Kicker — the microscopic, wide-tracked gold tag before every title. Its tiny
+   scale against the giant serif below is the engine of the whole aesthetic. */
+.lacqua__kicker {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.6rem, 0.85vw, 0.74rem);
+  font-weight: 400;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  padding-left: 0.1em; /* optically align the tracked caps to the title edge */
+}
+
+/* Title — the editorial serif, MASSIVE, in its native Light weight (the only
+   serif weight the site loads), which reads as elegant rather than heavy at
+   this scale. Each line is a masked row revealed independently. */
+.lacqua__title {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: clamp(3.1rem, 9.5vw, 8.5rem);
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+}
+
+/* Mask — clips its line; padding-bottom extends the clip below the baseline so
+   descenders (p, q, g) are never sheared, with a matching negative margin so the
+   stacked lines stay tight. */
+.lacqua__title-mask {
+  display: block;
+  overflow: hidden;
+  padding: 0.02em 0.08em 0.18em;
+  margin: 0 -0.08em -0.12em;
+}
+.lacqua__title-line {
+  display: block;
+  will-change: transform;
+}
+
+/* Lead — the contemplative line: soft italic serif, never competing with the
+   title, capped to a comfortable measure. */
+.lacqua__lead {
+  margin: 0;
+  max-width: 38ch;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 1.9vw, 1.65rem);
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+}
+
+/* --- Technical specs — the SANS / numeric face -----------------------------
+   A hairline-separated row of stats; the precise, machined counterpoint to the
+   serif. Wraps to a stack on narrow screens. */
+.lacqua__specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.6rem, 3.5vw, 3.25rem);
+  margin: 0;
+  padding-top: clamp(0.4rem, 1.4vh, 1rem);
+}
+.lacqua__spec {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+/* Hairline divider between stats (not before the first). */
+.lacqua__spec + .lacqua__spec {
+  padding-left: clamp(1.6rem, 3.5vw, 3.25rem);
+}
+.lacqua__spec + .lacqua__spec::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.12em;
+  bottom: 0.12em;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(236, 231, 221, 0.22),
+    transparent
+  );
+}
+.lacqua__spec-value {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(1.45rem, 3vw, 2.4rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+.lacqua__spec-unit {
+  font-size: 0.46em;
+  letter-spacing: 0.06em;
+  margin-left: 0.4em;
+  color: var(--color-ink-soft);
+}
+.lacqua__spec-label {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.64rem, 0.9vw, 0.76rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  max-width: 16ch;
+}
+
+/* --- Scroll cue (hero only) ------------------------------------------------- */
+.lacqua__cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: clamp(0.5rem, 3vh, 2rem);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+.lacqua__cue-line {
+  width: 2.75rem;
+  height: 1px;
+  background: linear-gradient(to right, var(--color-gold), transparent);
+}
+
+/* --- Closing CTA ------------------------------------------------------------ */
+.lacqua__actions {
+  margin-top: clamp(0.75rem, 2.5vh, 1.75rem);
+}
+
+/* ============================================================================
+   MOBILE — the photo still fills the screen behind the text, but we stay true to
+   the brief: NO card, NO glass. Legibility instead comes from a stronger
+   bottom-up ramp on the IMAGE, and the title steps down to a size that fits.
+   ========================================================================== */
+@media (max-width: 768px) {
+  .lacqua__panel {
+    padding:
+      clamp(2.5rem, 8vh, 5rem)
+      clamp(1.25rem, 6vw, 2rem)
+      clamp(3rem, 8vh, 5rem);
+  }
+  .lacqua__content {
+    max-width: 100%;
+  }
+  .lacqua__title {
+    font-size: clamp(2.6rem, 13vw, 4.6rem);
+    line-height: 0.98;
+  }
+  .lacqua__vignette {
+    background:
+      linear-gradient(
+        to top,
+        rgba(2, 3, 4, 0.95) 0%,
+        rgba(2, 3, 4, 0.62) 34%,
+        rgba(2, 3, 4, 0) 66%
+      ),
+      radial-gradient(150% 120% at 50% 28%, transparent 38%, rgba(2, 3, 5, 0.58) 100%);
+  }
+}
+
+/* ============================================================================
+   REDUCED MOTION — belt-and-braces with the JS branch: the static photo stays,
+   every line is sharp and present, the breathing/dissolves never run, and the
+   image fade-in is dropped so nothing animates at all.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .lacqua__image {
+    animation: none;
+  }
+  .lacqua__title-line {
+    transform: none;
+  }
+  .lacqua [data-rise],
+  .lacqua [data-content] {
+    opacity: 1;
+  }
+}

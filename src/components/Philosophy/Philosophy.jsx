@@ -3,6 +3,8 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { prefersReducedMotion } from '../../utils/animations'
+import { useTransitionNavigate } from '../../transitions/transitionContext'
+import BezelButton from '../ui/BezelButton'
 import './Philosophy.css'
 
 // Self-contained registration — idempotent, mirrors Collection/Hero.
@@ -49,6 +51,7 @@ const MEDIA_SUB = 'assets/zen-garden.avif'
  */
 export default function Philosophy() {
   const root = useRef(null)
+  const navigate = useTransitionNavigate()
 
   useGSAP(
     () => {
@@ -157,6 +160,18 @@ export default function Philosophy() {
             trattiene il tempo e l&apos;acqua modella la forma. Non forziamo la
             crescita, assecondiamo l&apos;armonia.
           </p>
+
+          {/* Gateway to the water-technology deep-dive (/l-acqua). Revealed with
+              the rest of the column via the same ink-blur stagger (data-ink). */}
+          <div className="philosophy__cta" data-ink>
+            <BezelButton
+              label="Il Respiro dell'Acqua"
+              arrow="up-right"
+              tone="gold"
+              onClick={() => navigate('/l-acqua')}
+              ariaLabel="Scopri la tecnologia dell'acqua"
+            />
+          </div>
         </div>
 
         {/* Media column — a large stone basin with a smaller raked-gravel plate

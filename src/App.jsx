@@ -8,6 +8,7 @@ import CustomCursor from './components/CustomCursor/CustomCursor'
 import { TransitionProvider } from './transitions/TransitionProvider'
 import Home from './pages/Home'
 import Storia from './pages/Storia/Storia'
+import Lacqua from './pages/Lacqua/Lacqua'
 import { prefersReducedMotion } from './utils/animations'
 import { collectCriticalAssets, preloadAll } from './utils/preloader'
 import { Analytics } from '@vercel/analytics/react'
@@ -131,6 +132,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/storia" element={<Storia />} />
+            <Route path="/l-acqua" element={<Lacqua />} />
           </Routes>
         </main>
       )}

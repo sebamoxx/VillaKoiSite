@@ -87,6 +87,14 @@
   max-width: 38ch;
 }
 
+/* CTA into the /l-acqua deep-dive. A flex wrapper so the inline-flex BezelButton
+   shrinks to its content and stays left-aligned in the column; a touch of extra
+   top space sets it apart from the lead. */
+.philosophy__cta {
+  display: flex;
+  margin-top: clamp(0.5rem, 1.5vh, 1.25rem);
+}
+
 /* --- Media column ----------------------------------------------------------
    Relative anchor: the main image is in flow, the sub plate is absolutely
    positioned so it can spill out of the lower-left corner into the text's
