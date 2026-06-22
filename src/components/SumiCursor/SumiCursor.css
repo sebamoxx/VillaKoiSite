@@ -1,0 +1,36 @@
+/* ============================================================================
+   SumiCursor — the global "Sumi-e ink trail" canvas
+   A single full-screen, fixed, click-through <canvas>. All the brush physics live
+   in SumiCursor.jsx; this file only places the surface and sets the blend that
+   makes one ink read on every ground.
+   ========================================================================== */
+
+.sumi-cursor {
+  position: fixed;
+  inset: 0;
+  /* Never intercept clicks, hover, selection or scroll. */
+  pointer-events: none;
+
+  /* Z-STACK — deliberately NOT the 9999 from the brief.
+     The site already owns a layered overlay stack: page sections sit at z-index
+     0–6, the cinematic route-transition "void" at 9000, the first-load preloader
+     curtain at 9999, and the liquid-silk cursor at the max int. The ink belongs
+     ABOVE every section but BELOW the void — so a page change cleanly swallows the
+     wet trail instead of having it float over the dark wipe — and of course below
+     the curtain and the real pointer. 100 clears all section z-indices (max 6)
+     while staying under the 9000 void. 9999 would have fought both the void and
+     the curtain. */
+  z-index: 100;
+
+  /* THE BLEND — the heart of "sumi-e on any ground".
+     The trail paints in the site's avorio ink (rgb 236,231,221). `difference`
+     inverts that against whatever sits beneath the canvas:
+       • over the near-black sumi grounds (#0a0a09) → luminous ivory smoke
+       • over the warm washi paper (#f5f2eb)        → deep charcoal-black ink
+     So the SAME stroke reads as ivory-ink on dark and sumi-ink on paper, with no
+     per-frame background sampling. This is precisely why the ink is light and the
+     blend is `difference`, rather than the literal black + `multiply` from the
+     brief (which is invisible on this mostly-dark site). It also matches the
+     liquid-silk cursor, which inverts the same way — one coherent ink language. */
+  mix-blend-mode: difference;
+}

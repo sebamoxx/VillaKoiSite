@@ -1,37 +1,50 @@
 /* ============================================================================
-   Page transitions — the "void"
-   One fixed sheet of absolute dark (#0a0908), mounted once above every route by
-   TransitionProvider. GSAP fades + blurs it in to swallow the outgoing page, then
-   fades it out so the incoming page emerges. It is the only blurred surface in the
-   app, and it is fixed — honouring the guardrail that backdrop-blur belongs only
-   to fixed/sticky layers, never to scrolling content.
+   Page transitions — the "Liquid Silk / Sumi-e ink curtain"
+   One fixed <svg> sheet of absolute ink (#0a0908), mounted once above every route
+   by TransitionProvider. GSAP morphs its single <path> to drop the curtain from
+   the top, swallow the outgoing page in black, swap the route, then keep flowing
+   the sheet down and off the bottom to reveal the incoming page.
+
+   THE viewBox HACK (the zero-lag mandate, in CSS form)
+   ----------------------------------------------------
+   The SVG carries viewBox="0 0 100 100" + preserveAspectRatio="none" in the markup,
+   so this rule only has to stretch the element edge-to-edge over the viewport; the
+   path's 0–100 coordinates then map to the real screen with NO per-frame JS pixel
+   math. `inset: 0` + 100% sizing (rather than the literal 100vw/100vh) fills the
+   viewport without provoking the classic 100vw-vs-scrollbar horizontal overflow.
    ========================================================================== */
 
-.transition-void {
+.transition-curtain {
   position: fixed;
   inset: 0;
-  /* The absolute dark void specified for the sink. Slightly warmer than pure
-     black so it reads as ink, not a switched-off screen. */
-  background-color: #0a0908;
+  width: 100%;
+  height: 100%;
 
-  /* Born invisible and inert. GSAP (autoAlpha) owns visibility + opacity; it
-     flips pointer-events to 'auto' only while the gesture is in flight so the
-     dark sheet swallows stray clicks on the page beneath, then back to 'none'. */
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-
-  /* Sits above every section but below the liquid-silk cursor (max z-index) and
-     the first-load preloader curtain (9999) — neither ever co-exists with it. */
+  /* Sits above every section but below the liquid-silk cursor (max z-index) and the
+     first-load preloader curtain (9999) — neither ever co-exists with it. Matches
+     the z-index the old "void" overlay held, so the whole stack is unchanged. */
   z-index: 9000;
 
-  /* These two are animated every frame of the gesture; hint the compositor. */
-  will-change: opacity, transform;
+  /* Born inert. GSAP flips this to 'auto' only while the gesture is in flight, so the
+     sheet swallows stray clicks the moment it covers (the busyRef guard handles the
+     sliver of time before full cover). */
+  pointer-events: none;
+
+  /* Isolate the full-screen path repaint on its OWN compositor layer: morphing `d`
+     re-rasterizes only this sheet, never the live page beneath it. This — plus
+     deleting the old backdrop-blur — is what keeps the curtain at 60fps on iOS. */
   transform: translateZ(0);
+  will-change: transform;
+}
+
+.transition-curtain path {
+  /* The fill (ink colour) is set inline; geometry is 100% GSAP. Keep edges crisp as
+     the curve sweeps across the viewport. */
+  shape-rendering: geometricPrecision;
 }
 
 /* Touch devices run no Lenis, so there is no `lenis.stop()` to freeze the scroll
-   during the ~0.8s gesture. Lock the native scroll instead — scoped to coarse
+   during the ~1.7s gesture. Lock the native scroll instead — scoped to coarse
    pointers so the desktop scrollbar (and its layout width) is never touched. */
 @media (pointer: coarse) {
   html.is-transitioning {

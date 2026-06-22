@@ -5,6 +5,7 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Preloader from './components/Preloader/Preloader'
 import CustomCursor from './components/CustomCursor/CustomCursor'
+import SumiCursor from './components/SumiCursor/SumiCursor'
 import { TransitionProvider } from './transitions/TransitionProvider'
 import Home from './pages/Home'
 import Storia from './pages/Storia/Storia'
@@ -114,6 +115,11 @@ function App() {
 
   return (
     <TransitionProvider>
+      {/* Global Sumi-e ink trail — one persistent, click-through canvas that lives
+          ABOVE every page yet OUTSIDE <Routes>, so it never remounts on navigation
+          and the route-transition void can wipe cleanly over it. */}
+      <SumiCursor />
+
       {/* Global liquid-silk cursor — present from the very first frame. */}
       <CustomCursor />
 

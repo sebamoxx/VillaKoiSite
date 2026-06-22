@@ -226,7 +226,7 @@ export default function Storia() {
             Niigata alle vasche dei collezionisti di tutto il mondo.
           </p>
           <span className="storia__scroll-cue" data-storia-hero aria-hidden="true">
-            Scorri per scendere nel tempo
+            Scorri per ripercorrere la storia
           </span>
         </div>
 

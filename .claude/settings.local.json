@@ -6,7 +6,15 @@
       "Bash(git -C \"C:/Users/Utente/Desktop/giardino-zen\" log --oneline -6)",
       "Bash(git -C \"C:/Users/Utente/Desktop/giardino-zen\" show --stat --oneline 1cd8193)",
       "PowerShell(npm install *)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Google/Chrome/Application/**)",
+      "Bash(rm -f __morph_harness.html __morph_shot.png __morph_shot2.png)",
+      "Bash(ls __morph*)",
+      "Bash(npm run *)",
+      "Bash(npx eslint *)",
+      "Bash(echo \"dev server pid: $!\")"
     ]
   }
 }
