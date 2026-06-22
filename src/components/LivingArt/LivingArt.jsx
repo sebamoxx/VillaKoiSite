@@ -182,7 +182,11 @@ export default function LivingArt() {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
+            style={{
+              imageRendering: 'high-quality', /* Suggerimento al browser per la qualità */
+              objectFit: 'cover'
+            }}
           />
         </div>
 
