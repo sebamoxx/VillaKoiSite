@@ -15,7 +15,24 @@
       "Bash(npm run *)",
       "Bash(npx eslint *)",
       "Bash(echo \"dev server pid: $!\")",
-      "PowerShell(npm run *)"
+      "PowerShell(npm run *)",
+      "Bash(git -C \"C:/Users/Utente/Desktop/giardino-zen\" ls-files)"
     ]
-  }
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_DIR}/.claude/skills/impeccable/scripts/hook.mjs\"",
+            "timeout": 5,
+            "statusMessage": "Checking UI changes"
+          }
+        ]
+      }
+    ]
+  },
+  "description": "Impeccable design detector: runs after Edit/Write/MultiEdit on UI files and surfaces findings as system reminders."
 }

@@ -1,0 +1,129 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-23T00:00:00.000Z",
+  "title": "Design System: jumboKoi",
+  "extensions": {
+    "colorMeta": {
+      "gold": { "role": "primary", "displayName": "Oro Caldo", "canonical": "#c8a86b", "tonalRamp": ["#2a2114", "#473821", "#6a532f", "#8d6f40", "#c8a86b", "#d8bd84", "#e6d2a6", "#f0e4cb", "#f7f1e3"] },
+      "gold-lift": { "role": "primary", "displayName": "Oro Sollevato", "canonical": "#d8bd84", "tonalRamp": ["#2e2514", "#4d3f23", "#705b33", "#967847", "#bf9d63", "#d8bd84", "#e6d2a6", "#f0e3c6", "#f8f2e6"] },
+      "sumi-black": { "role": "neutral", "displayName": "Nero Sumi", "canonical": "#0a0a09", "tonalRamp": ["#0a0a09", "#161513", "#26221d", "#3b362f", "#5c554a", "#857d6f", "#b0a89a", "#d6cfc2", "#ece7dd"] },
+      "inkstone": { "role": "neutral", "displayName": "Inkstone", "canonical": "#12100f", "tonalRamp": ["#12100f", "#1d1a17", "#2c2823", "#423c34", "#615a4f", "#8a8276", "#b4ac9f", "#d8d1c6", "#f0ece4"] },
+      "avorio-ink": { "role": "neutral", "displayName": "Avorio", "canonical": "#ece7dd", "tonalRamp": ["#26221d", "#3d382f", "#5a5347", "#7d7567", "#a39a8a", "#c4bcae", "#dcd5c9", "#ece7dd", "#f6f3ec"] },
+      "washi-paper": { "role": "neutral", "displayName": "Carta Washi", "canonical": "#f5f2eb", "tonalRamp": ["#2b2820", "#464236", "#665f4f", "#8b8472", "#b1a999", "#d2cabb", "#e6e0d4", "#f5f2eb", "#fbfaf5"] },
+      "sumi-dark": { "role": "neutral", "displayName": "Sumi Scuro", "canonical": "#26221d", "tonalRamp": ["#13110e", "#26221d", "#3b352d", "#564e42", "#776e5d", "#9c9281", "#c0b8a8", "#ddd6c9", "#efeae0"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titolo hero e grandi titoli di sezione. Cormorant Light, tetto ~4.5rem." },
+      "headline": { "displayName": "Headline", "purpose": "Titoli editoriali forti (es. il titolo della sezione Bespoke)." },
+      "title": { "displayName": "Title", "purpose": "Sottotitoli e stati (es. messaggio di conferma form)." },
+      "body": { "displayName": "Body", "purpose": "Paragrafi e lead; larghezza 36-42ch." },
+      "label": { "displayName": "Label", "purpose": "Etichette dei campi form, maiuscolo tracciato." },
+      "eyebrow": { "displayName": "Eyebrow / Kicker", "purpose": "Kicker bilingue kanji + italiano in oro. Cadenza rara, non meccanica." }
+    },
+    "shadows": [
+      { "name": "aura-gold-rest", "value": "0 0 26px -8px rgba(200,168,107,0.45)", "purpose": "Alone tenue attorno al submit a riposo." },
+      { "name": "aura-gold-hover", "value": "0 0 50px -12px rgba(200,168,107,0.5)", "purpose": "Bagliore intensificato su hover dei CTA." },
+      { "name": "machined-inset", "value": "inset 0 1px 0 rgba(255,255,255,0.14), inset 0 0 0 1px rgba(255,255,255,0.04)", "purpose": "Sheen lavorato sul core dei bottoni." },
+      { "name": "liquid-glass", "value": "0 60px 120px -50px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.12)", "purpose": "Ombra ambientale profonda + highlight della card di vetro scura." },
+      { "name": "chip-inner-glow", "value": "inset 0 0 18px rgba(200,168,107,0.2)", "purpose": "Respiro dorato interno del chip selezionato." }
+    ],
+    "motion": [
+      { "name": "ease-reveal", "value": "expo.out", "purpose": "Testo mascherato che entra in vista (GSAP)." },
+      { "name": "ease-soft", "value": "power4.out", "purpose": "Settle di opacità / posizione." },
+      { "name": "ease-drift", "value": "sine.inOut", "purpose": "Loop lenti, tidali, infiniti (Ken Burns)." },
+      { "name": "bezel-spring", "value": "cubic-bezier(0.32, 0.72, 0, 1)", "purpose": "Curva firma per ogni cambio di stato dei controlli." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "480px" },
+      { "name": "md", "value": "767px" },
+      { "name": "lg", "value": "860px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Bezel Button — Gold",
+      "kind": "button",
+      "refersTo": "button-gold",
+      "description": "CTA primario: doppio bezel (guscio ⊃ core) con tono oro pieno e icona in pozzetto.",
+      "html": "<button class=\"ds-bezel ds-bezel--gold\"><span class=\"ds-bezel__core\"><span class=\"ds-bezel__label\">Il Respiro dell'Acqua</span><span class=\"ds-bezel__icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M7 17 17 7M9 7h8v8\"/></svg></span></span></button>",
+      "css": ".ds-bezel{display:inline-flex;padding:6px;border-radius:999px;border:1px solid rgba(200,168,107,.22);background:rgba(200,168,107,.06);cursor:pointer;transition:border-color .6s cubic-bezier(.32,.72,0,1),background-color .6s cubic-bezier(.32,.72,0,1),box-shadow .6s cubic-bezier(.32,.72,0,1)}.ds-bezel:hover{border-color:rgba(200,168,107,.5);background:rgba(200,168,107,.1);box-shadow:0 0 50px -12px rgba(200,168,107,.5)}.ds-bezel:focus-visible{outline:2px solid #c8a86b;outline-offset:4px}.ds-bezel__core{display:inline-flex;align-items:center;gap:1.2rem;padding:.65rem .65rem .65rem 1.6rem;border-radius:999px;box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 0 0 1px rgba(255,255,255,.04);transition:transform .5s cubic-bezier(.32,.72,0,1),background-color .6s cubic-bezier(.32,.72,0,1)}.ds-bezel:active .ds-bezel__core{transform:scale(.97)}.ds-bezel__label{font-family:Inter,sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}.ds-bezel__icon{display:inline-flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;border-radius:999px;transition:transform .5s cubic-bezier(.32,.72,0,1)}.ds-bezel__icon svg{width:38%;height:38%}.ds-bezel:hover .ds-bezel__icon{transform:translate(3px,-3px) scale(1.06)}.ds-bezel--gold .ds-bezel__core{background:#c8a86b;color:#1a1206}.ds-bezel--gold:hover .ds-bezel__core{background:#d8bd84}.ds-bezel--gold .ds-bezel__icon{background:rgba(26,18,6,.14);color:#1a1206}.ds-bezel--gold:hover .ds-bezel__icon{background:rgba(26,18,6,.22)}"
+    },
+    {
+      "name": "Bezel Button — Ghost",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Azione secondaria / back: stesso doppio bezel, anello avorio tenue, nessun bagliore.",
+      "html": "<button class=\"ds-bezel ds-bezel--ghost\"><span class=\"ds-bezel__core\"><span class=\"ds-bezel__label\">Torna alla Collezione</span><span class=\"ds-bezel__icon\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M15 7 7 12l8 5\"/></svg></span></span></button>",
+      "css": ".ds-bezel--ghost{display:inline-flex;padding:6px;border-radius:999px;background:rgba(236,231,221,.04);border:1px solid rgba(236,231,221,.16);cursor:pointer;transition:border-color .6s cubic-bezier(.32,.72,0,1),background-color .6s cubic-bezier(.32,.72,0,1)}.ds-bezel--ghost:hover{border-color:rgba(236,231,221,.34);background:rgba(236,231,221,.07)}.ds-bezel--ghost:focus-visible{outline:2px solid #c8a86b;outline-offset:4px}.ds-bezel--ghost .ds-bezel__core{display:inline-flex;align-items:center;gap:1.2rem;padding:.65rem .65rem .65rem 1.6rem;border-radius:999px;background:transparent;color:#ece7dd;box-shadow:inset 0 1px 0 rgba(255,255,255,.08);transition:transform .5s cubic-bezier(.32,.72,0,1)}.ds-bezel--ghost:active .ds-bezel__core{transform:scale(.97)}.ds-bezel__label{font-family:Inter,sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase}.ds-bezel--ghost .ds-bezel__icon{display:inline-flex;align-items:center;justify-content:center;width:2.4rem;height:2.4rem;border-radius:999px;background:rgba(236,231,221,.1);color:#ece7dd;transition:transform .5s cubic-bezier(.32,.72,0,1)}.ds-bezel--ghost .ds-bezel__icon svg{width:38%;height:38%}.ds-bezel--ghost:hover .ds-bezel__icon{background:rgba(236,231,221,.16);transform:translate(-3px,0) scale(1.06)}"
+    },
+    {
+      "name": "Underline Input",
+      "kind": "input",
+      "refersTo": "input-underline",
+      "description": "Campo solo-underline, testo in serif; la linea si accende in oro al focus.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field__label\">Nome</span><input class=\"ds-input\" type=\"text\" placeholder=\"Il tuo nome\"></label>",
+      "css": ".ds-field{display:flex;flex-direction:column;gap:.55rem}.ds-field__label{font-family:Inter,sans-serif;font-size:.7rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;color:rgba(236,231,221,.62)}.ds-input{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(236,231,221,.22);color:#ece7dd;font-family:'Cormorant Garamond',Georgia,serif;font-size:1.2rem;padding:.5rem .2rem;transition:border-color .3s ease,box-shadow .3s ease}.ds-input::placeholder{color:rgba(236,231,221,.3)}.ds-input:focus{outline:none;border-bottom-color:#c8a86b;box-shadow:0 1px 0 0 #c8a86b}"
+    },
+    {
+      "name": "Chip (radio)",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pillola selezionabile; il selezionato vira oro con glow interno.",
+      "html": "<div class=\"ds-chips\"><label class=\"ds-chip is-selected\"><span>Desidero una Koi</span></label><label class=\"ds-chip\"><span>Voglio un Laghetto</span></label><label class=\"ds-chip\"><span>Entrambi</span></label></div>",
+      "css": ".ds-chips{display:flex;flex-wrap:wrap;gap:.6rem}.ds-chip{display:inline-flex;align-items:center;padding:.6rem 1.15rem;border-radius:999px;border:1px solid rgba(236,231,221,.2);color:rgba(236,231,221,.62);font-family:Inter,sans-serif;font-size:.85rem;line-height:1;cursor:pointer;transition:color .3s ease,border-color .3s ease,background-color .3s ease,box-shadow .3s ease}.ds-chip:hover{color:#ece7dd;border-color:rgba(200,168,107,.5)}.ds-chip.is-selected{color:#ece7dd;border-color:rgba(200,168,107,.7);background-color:rgba(200,168,107,.12);box-shadow:inset 0 0 18px rgba(200,168,107,.2)}"
+    },
+    {
+      "name": "Submit (magnetic)",
+      "kind": "button",
+      "refersTo": "submit",
+      "description": "Submit del form: anello oro + aura a riposo; si riempie d'oro su hover.",
+      "html": "<button class=\"ds-submit\"><span>Invia Richiesta</span></button>",
+      "css": ".ds-submit{display:inline-flex;align-items:center;justify-content:center;padding:1rem 2.4rem;border-radius:999px;border:1px solid rgba(200,168,107,.55);background-color:rgba(200,168,107,.06);color:#c8a86b;font-family:Inter,sans-serif;font-size:.82rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;box-shadow:0 0 26px -8px rgba(200,168,107,.45);transition:color .4s ease,background-color .4s ease,box-shadow .4s ease,border-color .4s ease}.ds-submit:hover{color:#060605;background-color:#c8a86b;border-color:#c8a86b;box-shadow:0 0 44px rgba(200,168,107,.5),inset 0 0 20px rgba(255,255,255,.25)}.ds-submit:focus-visible{outline:2px solid #c8a86b;outline-offset:3px}"
+    },
+    {
+      "name": "Liquid Glass Card",
+      "kind": "card",
+      "refersTo": "card-glass",
+      "description": "Card editoriale in vetro liquido scuro: backdrop blur, anello bianco tenue, ombra ambientale profonda.",
+      "html": "<article class=\"ds-glass\"><p class=\"ds-glass__eyebrow\">誂え · SU MISURA</p><h3 class=\"ds-glass__title\">Progetta la tua armonia.</h3><p class=\"ds-glass__lead\">Ogni commissione inizia con un dialogo. Raccontaci la tua visione e daremo forma alla quiete che cerchi.</p></article>",
+      "css": ".ds-glass{display:block;max-width:520px;padding:clamp(1.75rem,4vw,4rem);background:rgba(255,255,255,.05);-webkit-backdrop-filter:blur(1px) saturate(130%);backdrop-filter:blur(1px) saturate(130%);border:1px solid rgba(255,255,255,.12);border-radius:26px;box-shadow:0 60px 120px -50px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.12)}.ds-glass__eyebrow{font-family:Inter,sans-serif;font-size:.74rem;font-weight:400;letter-spacing:.4em;text-transform:uppercase;color:#c8a86b;margin:0 0 1.2rem}.ds-glass__title{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:clamp(2.4rem,5vw,4.25rem);line-height:1;letter-spacing:-.015em;color:#ece7dd;margin:0 0 1rem}.ds-glass__lead{font-family:Inter,sans-serif;font-size:1.05rem;line-height:1.65;color:rgba(236,231,221,.62);max-width:42ch;margin:0}"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Galleria Sommersa",
+    "overview": "jumboKoi è una galleria d'arte silenziosa vista attraverso l'acqua. I koi non sono prodotti: sono opere esposte dietro un vetro liquido, illuminate da una luce che filtra dall'alto come in un acquario museale. Tutto il sistema serve questa illusione — la rarità del sumi-e, la calma del karesansui, il lusso per sottrazione di una maison. La pagina respira: si apre nel buio inchiostro, esala nella luce calda della carta washi, e si richiude nell'inkstone notturno. La profondità non nasce da ombre piatte ma da luce-come-materia: bagliori d'oro, riflessi inset e strati tonali nel buio.",
+    "keyCharacteristics": [
+      "Palette ristretta e drammatica: near-black, avorio, un solo oro caldo; carta washi come controcanto luminoso.",
+      "Coppia tipografica a contrasto: serif Cormorant Garamond (Light) + sans Inter.",
+      "Profondità per bagliore e riflesso inset, non per drop-shadow.",
+      "Movimento tidale, scrubbed sullo scroll; reduced-motion sempre onorato.",
+      "Cursori custom (silk + inchiostro sumi) come firma sensoriale."
+    ],
+    "rules": [
+      { "name": "La Regola dell'Unica Voce", "body": "L'oro è l'unico colore. Compare su ≤10% di qualsiasi schermata. Non introdurre mai un secondo hue.", "section": "colors" },
+      { "name": "La Regola del Respiro", "body": "Lo sfondo è una drammaturgia: sumi → washi → inkstone. Ogni blocco rispetta la fase cromatica in cui si trova.", "section": "colors" },
+      { "name": "La Regola del Mai-Puro", "body": "Nessun #000 e nessun #fff. Il nero è inchiostro (#0a0a09), il bianco è avorio (#ece7dd).", "section": "colors" },
+      { "name": "La Regola del Kicker Bilingue", "body": "L'eyebrow è un sistema firmato: kanji · parola italiana maiuscola in oro. Cadenza rara, non meccanica. Senza kanji e oro non è un kicker jumboKoi.", "section": "typography" },
+      { "name": "La Regola del Serif nei Campi", "body": "Gli input si scrivono in Cormorant serif, non in sans. Anche compilare un form deve sembrare scrittura elegante.", "section": "typography" },
+      { "name": "La Regola Luce-non-Ombra", "body": "Per la profondità raggiungi prima il bagliore e il riflesso inset, non il drop-shadow. Un'ombra grigia piatta sotto una card è proibita.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do usare l'oro (#c8a86b) come unica voce di colore, su ≤10% dello schermo.",
+      "Do rispettare il respiro cromatico: sumi (#0a0a09) → washi (#f5f2eb) → inkstone (#12100f).",
+      "Do dare profondità con bagliori e riflessi inset, non con drop-shadow piatte.",
+      "Do scrivere i titoli in Cormorant Light (≤4.5rem, tracking ≥ -0.04em) e il testo in Inter.",
+      "Do usare il kicker firmato kanji · italiano-maiuscolo-oro come cadenza rara e deliberata.",
+      "Do mantenere ogni easing lungo e morbido (expo.out / power4.out / sine.inOut; spring cubic-bezier(0.32,0.72,0,1)).",
+      "Do fornire sempre un'alternativa prefers-reduced-motion e focus-visible visibili."
+    ],
+    "donts": [
+      "Don't introdurre estetica e-commerce: niente griglie di prodotti, prezzi, badge, carrello o 'aggiungi al carrello'.",
+      "Don't scivolare nel negozio di acquariofilia / garden center.",
+      "Don't usare i tell della landing startup/SaaS: bg cream, card identiche, hero-metric, gradient text, glassmorphism decorativo, marker 01/02/03.",
+      "Don't mettere un eyebrow maiuscolo tracciato generico su ogni sezione.",
+      "Don't usare nero puro (#000) o bianco puro (#fff).",
+      "Don't usare border-left/border-right colorato >1px come accento (side-stripe).",
+      "Don't usare testo grigio chiaro su fondo tinto: il body deve superare 4.5:1."
+    ]
+  }
+}

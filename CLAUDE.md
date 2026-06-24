@@ -22,3 +22,5 @@ OUTPUT
 
 Queste modalità sono mutuamente esclusive.
 Se viene selezionata una modalità, ignora le altre.
+
+
